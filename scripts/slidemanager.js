@@ -5,7 +5,6 @@ function goBack() {
     window.history.back();
 }
 var bang_pageid = parseInt(window.location.href.split('#')[1]);
-console.log(bang_pageid);
 if (isNaN(bang_pageid)) {
     window.location.href = window.location.href.split('#')[0] + '#' + 0;
 } else {

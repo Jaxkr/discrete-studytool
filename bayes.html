@@ -25,7 +25,7 @@
         </nav>
         <br>
         <button onclick="goBack()" class="hiddenslide btn btn-light btn-lg" id="prevslide">&larr; Previous page</button>
-        <div style="width: 80%; margin: 60px auto 0px auto;">
+        <div style="margin: 60px auto 0px auto;">
             <div id="slide0">
                 <h3>Bayes' Theorem</h3>
                 <p>Make sure you've reviewed the slides available <a target="_blank" href="https://drive.google.com/file/d/1dzDFCiaPYLvmHys66rEmK2o8mzZwD7Bo/view">here</a>
@@ -34,6 +34,27 @@
             </div>
             <div id="slide1">
                 <h3>Cancer Testing Example Illustrated</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <span id="ctsrprob"></span> <input class="cancerslider" type="range" id="ctsr" min="0" max="1"
+                            step=".01" name="ctsr"> <label for="ctsr">Success rate of
+                            cancer test (non false positives)</label><br>
+                        <span id="knownpopprob"></span> <input class="cancerslider" type="range" id="knownpop" min="0"
+                            max="1" step=".01" name="ctsr"> <label for="ctsr">Percentage of population known to have
+                            cancer</label><br>
+                        <span id="falsepospop"></span> <input class="cancerslider" type="range" id="falsepos" min="0"
+                            max="1" step=".01" name="ctsr"> <label for="ctsr">Chance of false positive</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p id="positivesuccessrate">Probability someone who tests positive actually has cancer:<br>
+                            $p(C|positive) = \frac{(.9)(.01)}{(.9)(.01) + (.08)(.99)}$ = <span id="probcancer"></span>
+                        </p>
+                        <p id="probcancerfree">
+                            Probability someone who tests negative for cancer is actually cancer free:
+                            
+                        </p>
+                    </div>
+                </div>
 
             </div>
 
@@ -53,6 +74,46 @@
         });
     </script>
     <script src="./scripts/slidemanager.js"></script>
+    <script>
+        var cancer_pos_test_success_rate = .9;
+        var cancer_negative_false_positive = .08;
+        var percent_pop_cancer = .01;
+
+        function update_results() {
+            var math = MathJax.Hub.getAllJax("positivesuccessrate")[0];
+            var eqtn = 'p(C|positive) = \\frac{(' + cancer_pos_test_success_rate + ')(' + percent_pop_cancer + ')}{(' + cancer_pos_test_success_rate + ')(' + percent_pop_cancer +
+                ') + (' + cancer_negative_false_positive + ')(' + (1 - percent_pop_cancer) + ')}';
+            console.log(eqtn);
+            MathJax.Hub.Queue(["Text", math, eqtn]);
+            var percent_positive_accurate = ((cancer_pos_test_success_rate) * (percent_pop_cancer)) / (cancer_pos_test_success_rate * percent_pop_cancer + cancer_negative_false_positive * (1 - percent_pop_cancer));
+            $('#probcancer').html((percent_positive_accurate * 100).toFixed(3) + '%');
+        }
+
+        function update_sliders() {
+            $('#ctsrprob').html(document.getElementById('ctsr').value * 100 + '%');
+            cancer_pos_test_success_rate = document.getElementById('ctsr').value;
+            $('#knownpopprob').html(document.getElementById('knownpop').value * 100 + '%');
+            percent_pop_cancer = document.getElementById('knownpop').value;
+            $('#falsepospop').html(document.getElementById('falsepos').value * 100 + '%');
+            cancer_negative_false_positive = document.getElementById('falsepos').value;
+
+            setTimeout(function () {
+                update_results();
+
+            }, 500);
+
+        }
+        $(document).ready(function () {
+            document.getElementById('ctsr').value = cancer_pos_test_success_rate;
+            document.getElementById('knownpop').value = percent_pop_cancer;
+            document.getElementById('falsepos').value = cancer_negative_false_positive;
+            update_sliders();
+        });
+        $('.cancerslider').change(function () {
+            update_sliders();
+        });
+
+    </script>
 
 </body>
 
