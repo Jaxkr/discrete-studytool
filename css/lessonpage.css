@@ -1,0 +1,14 @@
+.hiddenslide {
+    display: none;
+}
+.innerproblem {
+    width: 90%;
+    margin: auto;
+    line-height: 30px;
+}
+.problembtn {
+    margin-left: 25px;
+}
+.tooltip-inner {
+    text-align: left;
+}

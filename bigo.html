@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Discrete Structures Study Tool</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/lessonpage.css">
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">CSCI 2824 Interactive Study Tool</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse navbar-right" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="/"><button class="btn btn-outline-success my-2 my-sm-0">&larr;
+                            Back to topics</button><span class="sr-only">(current)</span></a>
+                </div>
+            </div>
+        </nav>
+        <br>
+        <button onclick="goBack()" class="hiddenslide btn btn-light btn-lg" id="prevslide">&larr; Previous page</button>
+        <div style="width: 80%; margin: 80px auto 0px auto;">
+            <div id="slide0">
+                <h3>Definitions</h3>
+                <p class="lead">
+                    <ul>
+                        <li>Big O - A function that represents the maximum possible value for a function (upper bound).</li>
+                        <li>Big Ω - A function that represents the minimum possible value for a function (lower bound).</li>
+                        <li>Big Θ - A function which represents the function behavior, and is simply equal to Big O (or
+                            Big Ω)
+                            <b>if any only if</b> Big O and Big Ω are the same.</li>
+                    </ul>
+                    <button class="nextslide btn btn-lg btn-primary">Got it!</button>
+                </p>
+
+            </div>
+            <div id="slide1" class="hiddenslide">
+                <h3>An example function</h3>
+                <p>Suppose we want to find the Big O notation for the following function:</p>
+                $$f(n) = 5n^2$$
+                <p>This is a very simple quadratic function, and it's Big O upper bound is $O(n^2)$.<br>
+                    Due to its simplicity,
+                    it's Big Ω lower bound is $Ω(n^2)$.</p>
+                <button class="nextslide btn btn-lg btn-primary">Got it!</button>
+            </div>
+            <div id="slide2" class="hiddenslide">
+                <h3>Quick comprehension check</h3>
+                <p>Consider again our previous function $f(n) = 5n^2$ with $O(n^2)$ and $Ω(n^2)$</p>
+                <p>What is Big Θ? Remember that Big Θ is only defined if Big O and Big Ω are equal.</p>
+                <button class="wronganswer btn btn-lg btn-light">Undefined</button> <button class="correctanswer btn btn-lg btn-light">$Θ(n^2)$</button>
+                <button class="wronganswer btn btn-lg btn-light">$Θ(n)$</button>
+                <div class="correctanswerexplanation hiddenslide">
+                    <br>
+                    <p>Correct! Since the Big O and Big Ω for this function are equal, big Θ is defined for this
+                        function and is equal to Big O (or Big Ω).</p>
+                    <button class="nextslide btn btn-lg btn-primary">Got it!</button>
+                </div>
+
+
+                <button class="hiddenslide nextslide btn btn-lg btn-primary">Got it!</button>
+            </div>
+            <div id="slide3" class="hiddenslide">
+                <h3>Solving for a Big O estimate</h3>
+                <p>Consider this new function $f(n) = 5n^2 + 10log(n)$. The correct way to approach this problem is
+                    through a series of inequalities.</p>
+                <div class="innerproblem">
+                    $ |f(n)| = |5n^2 + 10log(n)| $ <button class="problembtn btn btn-sm btn-dark" data-toggle="tooltip"
+                        data-placement="right" title="We wrap the function in an absolute value because we are finding the bounds for the function, so whether its positive or negative doesn't matter.">?</button><br>
+                    It's true that $log(n) \leq n$ for all values $n > 1$<br>
+                    $|f(n)| \leq |5n^2 + 10n|$<br>
+                    $|f(n)| \leq |5n^2 + 10n^2|$<br>
+                    $|f(n)| \leq |15n^2|$<br>
+                    To get the big O bound, we take the function without any coefficients. Therefore, this function is:<br>
+                    $O(n^2)$ with $c=15$ and $k=1$<br> The c value is the coeffient in front of the $n^2$, and k is the minimum value for which our inequalities hold (which we defined above as 1).
+                </div><br>
+                <button class="nextslide btn btn-lg btn-primary">Got it!</button>
+
+            </div>
+            <div id="slide4" class="hiddenslide">
+                <p>This is the end of this lesson. For more information, consult some of the <a target="_blank" href="https://github.com/tonyewong/CSCI2824-Discrete-Structures/blob/master/resources/schedule.md">slides available on the schedule</a>.</p>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+    <script src="./scripts/bootstrap.bundle.min.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+        });
+    </script>
+    <script src="./scripts/slidemanager.js"></script>
+
+</body>
+
+</html>

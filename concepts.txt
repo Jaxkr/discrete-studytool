@@ -1,0 +1,37 @@
+Big O bound
+
+3n^3 + 50nlog(n^3) - n^2
+3n^3 <= 3n^3
+150nlog(n) < 150n^2 <= 150n^2
+- n^2 < 0
+
+abs(f(n)) = 3n^3 + 150n^3 + 0
+abs(f(n)) = abs(153n^3)
+k = 1
+c = 153
+
+Big Theta
+3n^3 + 150nlog(n) - n^2
+3n^3 >= 3n^3
+150nlog(n) >= 0 (not much effect on end behavior)
+-n^2 >= -n^3
+
+abs(fn(n)) = 3n^3 - n^3
+f(n) = 2n^3
+theta = n^3 k = 1, c=2
+
+Trees:
+Tree vs. non Tree
+Tree  can be though of as directed graph
+Leaves = any node with degree 1
+m-ary tree if every internal vertex has no more than m children
+full m-ary tree if every internet vertex has exactly m children
+
+Proving a full m-ary tree with i internal verties has n = m*i + 1
+n = i * m + 1
+
+
+
+
+
+Recurrence relations
